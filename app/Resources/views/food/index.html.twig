@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Foods list</h1>
+    <form method="post" name="name" action="{{ path('food_index') }}">
+        <p>Affiner votre recherche</p>
+        <input type="text" name="search" placeholder="Mot-clef">
+        <input type="submit" name="submit" value="Rechercher">
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for food in foods %}
+            <tr>
+                <td><a href="{{ path('food_show', { 'id': food.id }) }}">{{ food.id }}</a></td>
+                <td>{{ food.name }}</td>
+                <td>{{ food.price }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('food_show', { 'id': food.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('food_edit', { 'id': food.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <ul>
+        <li>
+            <a href="{{ path('food_new') }}">Create a new food</a>
+        </li>
+    </ul>
+{% endblock %}
